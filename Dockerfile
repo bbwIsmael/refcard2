@@ -1,6 +1,8 @@
 # Multi-stage build for React application
 FROM node:18-alpine AS build
 WORKDIR /app
+# Set environment variable for OpenSSL legacy provider (needed for webpack 4)
+ENV NODE_OPTIONS=--openssl-legacy-provider
 COPY package*.json ./
 RUN npm ci
 COPY . .
